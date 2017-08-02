@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>sms-notification</artifactId>
+        <groupId>com.tyrion.nucleus</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>sms-notification-build</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tyrion.nucleus</groupId>
+            <artifactId>sms-notification-gateway</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.inductiveautomation.ignitionsdk</groupId>
+                <artifactId>ignition-maven-plugin</artifactId>
+                <version>1.0.12</version>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>modl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <projectScopes>
+                        <projectScope>
+                            <name>sms-notification-gateway</name>
+                            <scope>G</scope>
+                        </projectScope>
+                    </projectScopes>
+
+                    <moduleId>com.tyrion.nucleus.sms-notification</moduleId>
+                    <moduleName>${project.parent.name}</moduleName>
+                    <moduleDescription>${project.description}</moduleDescription>
+                    <moduleVersion>1.0.16</moduleVersion>
+                    <requiredIgnitionVersion>7.9.3</requiredIgnitionVersion>
+                    <requiredFrameworkVersion>7</requiredFrameworkVersion>
+
+                    <hooks>
+                        <hook>
+                            <scope>G</scope>
+                            <hookClass>com.tyrion.nucleus.GatewayHook</hookClass>
+                        </hook>
+                    </hooks>
+
+                    <depends>
+                        <depend>
+                            <scope>G</scope>
+                            <moduleId>com.inductiveautomation.alarm-notification</moduleId>
+                        </depend>
+                    </depends>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
